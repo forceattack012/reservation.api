@@ -1,0 +1,9 @@
+port: 8081
+database:
+  host: localhost
+  username: admin_user
+  password: admin
+  dbname: reservation_db
+  dbport: 5432
+  sslmode: disable
+  tz: Asia/Bangkok

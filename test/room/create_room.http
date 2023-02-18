@@ -1,0 +1,9 @@
+POST http://localhost:8080/api/room
+Content-Type: application/json
+
+{
+    "room_name": "1111",
+    "kind": "small",
+    "price": 100.00,
+    "is_available": true
+}

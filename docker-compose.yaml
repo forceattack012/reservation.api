@@ -12,16 +12,16 @@ services:
     ports:
       - "5432:5432"
 
-  # reservation.api:
-  #   container_name: reservation.api
-  #   restart: always
-  #   image: ${DOCKER_REGISTRY-}reservation.api
-  #   depends_on:
-  #     - db
-  #   build: 
-  #     context: .
-  #     dockerfile: dockerfile
-  #   volumes:
-  #     - ./config_docker:/app/config
-  #   ports:
-  #     - 8080:8080
+  reservation.api:
+    container_name: reservation.api
+    restart: always
+    image: ${DOCKER_REGISTRY-}reservation.api
+    depends_on:
+      - db
+    build: 
+      context: .
+      dockerfile: dockerfile
+    volumes:
+      - ./config_docker:/app/config
+    ports:
+      - 8080:8080

@@ -1,0 +1,9 @@
+PATCH http://localhost:8081/api/room/5
+Content-Type: application/json
+
+{
+    "room_name": "sdssdsdsaadsadsadåsdsa",
+    "kind": "small",
+    "price": 10000.00,
+    "is_available": true
+}

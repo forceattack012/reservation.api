@@ -3,7 +3,6 @@ package application
 import (
 	"errors"
 
-	"github.com/PeteProgrammer/go-automapper"
 	"github.com/forceattack012/reservationroom/domain"
 )
 
@@ -35,12 +34,17 @@ func (r *RoomService) UpdateRoom(id int, room *domain.Room) error {
 		return err
 	}
 
-	if findRoom == nil {
+	if findRoom.Id == 0 {
 		return errors.New("id not found")
 	}
 
-	automapper.Map(room, findRoom)
-	err = r.repo.Update(findRoom)
+	findRoom = &domain.Room{
+		RoomName:    room.RoomName,
+		Kind:        room.Kind,
+		Price:       room.Price,
+		IsAvaliable: room.IsAvaliable,
+	}
+	err = r.repo.Update(id, findRoom)
 
 	return err
 }

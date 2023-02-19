@@ -42,6 +42,28 @@ func (r *RoomHandler) CreateRoom(c *fiber.Ctx) error {
 	}
 
 	return c.Status(http.StatusCreated).JSON(map[string]string{
-		"ID": strconv.Itoa(room.Id),
+		"ID": strconv.Itoa(int(room.Id)),
 	})
+}
+
+func (r *RoomHandler) UpdateRoom(c *fiber.Ctx) error {
+	id := c.AllParams()["roomId"]
+	roomId, _ := strconv.Atoi(id)
+
+	var room domain.Room
+	err := c.BodyParser(&room)
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(map[string]string{
+			"error": err.Error(),
+		})
+	}
+
+	err = r.service.UpdateRoom(roomId, &room)
+	if err != nil {
+		return c.Status(http.StatusInternalServerError).JSON(map[string]string{
+			"error": err.Error(),
+		})
+	}
+
+	return c.SendStatus(http.StatusOK)
 }

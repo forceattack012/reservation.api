@@ -1,10 +1,11 @@
 package domain
 
 type Person struct {
-	Id    uint   `json:"id"`
-	Name  string `json:"name"`
-	Email string `json:"email" validate:"email,omitempty"`
-	Phone string `json:"phone"`
+	Id          uint          `json:"id" gorm:"primaryKey"`
+	Name        string        `json:"name"`
+	Email       string        `json:"email" validate:"email,omitempty"`
+	Phone       string        `json:"phone"`
+	Reservation []Reservation `json:"-" gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL;"`
 }
 
 type PersonService interface {
